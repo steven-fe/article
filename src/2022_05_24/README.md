@@ -453,6 +453,10 @@ promiseAllThrottled(requests, 3)
   .catch((error) => console.error('Oops something went wrong', error))
 ```
 
+## 练习一下吧
+
+[45 道 Promise 面试题](https://juejin.cn/post/6844904077537574919#heading-54)
+
 ## 总结
 
 求木之长者，必固其根本；欲流之远者，必浚其泉源。短短的两百多行代码，解释了 promise 所有的特性，平时开发中遇到的 promise 问题瞬间豁然开朗。
