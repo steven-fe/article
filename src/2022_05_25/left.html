@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <p>接受的消息：<span></span></p>
+      <input type="text" placeholder="随便写点什么" />
+      <button>确认</button>
+    </div>
+    <script>
+      const targetOrigin = '/'
+      const targetWindow = window.parent.frames[1]
+      const inputEle = document.querySelector('input')
+      const msgEle = document.querySelector('span')
+
+      document.querySelector('button').addEventListener('click', () => {
+        targetWindow.postMessage(inputEle.value, targetOrigin)
+      })
+
+      window.addEventListener('message', (event) => {
+        msgEle.innerHTML = event.data
+      })
+    </script>
+  </body>
+</html>

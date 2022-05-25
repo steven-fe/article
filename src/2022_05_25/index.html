@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        display: flex;
+      }
+      iframe {
+        flex: 1 0 auto;
+        height: 200px;
+        border: 1px inset #333;
+      }
+      iframe + iframe {
+        border-left: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>模拟postMessage跨域解决方案</h1>
+    <div>
+      <iframe src="http://127.0.0.1:8081/left.html" frameborder="0"></iframe>
+      <iframe src="http://127.0.0.1:8081/right.html" frameborder="0"></iframe>
+      <!-- <iframe src="http://jwzz1.gitee.io/learngit" frameborder="0"></iframe> -->
+    </div>
+  </body>
+</html>
