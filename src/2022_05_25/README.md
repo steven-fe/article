@@ -14,7 +14,7 @@ targetWindow.postMessage(message, targetOrigin, [transfer])
 
 - targetWindow：目标窗口的`全局对象`引用，比如 iframe 的 contentWindow 属性、执行 window.open 返回的窗口对象、或者是命名过或数值索引的 window.frames。
 
-- message：将要发送到`目标窗口`的数据，可以是任何类型的数据。它将会被[结构化克隆算法](https://developer.mozilla.org/en-US/docs/web/api/web_workers_api/structured_clone_algorithm)序列化。这意味着可以不受什么限制的将数据对象安全的传送给目标窗口而无需自己序列化。
+- message：将要发送到`目标窗口`的数据，可以是任何类型的数据。message 数据会被[结构化克隆算法](https://developer.mozilla.org/en-US/docs/web/api/web_workers_api/structured_clone_algorithm)序列化，这意味着可以不受什么限制的将数据对象安全的传送给目标窗口而无需自己序列化。
 
 - targetOrigin：指定目标窗口的 origin ，只有目标窗口的 origin 与 targetOrigin 对应，目标窗口才可以接收到数据。
 
@@ -34,7 +34,7 @@ window.addEventListener('message', (event) => {
 })
 ```
 
-- data：从其他 window 中传递过来的数据。
+- data：从其他 window 中传递过来的数据，`该数据为message数据的克隆版本，而非message数据本身`。
 
 - origin：发送窗口的 origin，一个由“协议“、“://“、“域名"、“ : 端口号”拼接而成的字符串。
 
