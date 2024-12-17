@@ -20,8 +20,8 @@
 
 ```js
 document.addEventListener('scroll', (event) => {
-  event.preventDefault() // Can't stop the page from scrolling
-})
+  event.preventDefault(); // Can't stop the page from scrolling
+});
 ```
 
 ### 多个事件的默认行为，都可以导致页面滑动
@@ -35,8 +35,8 @@ document.addEventListener('scroll', (event) => {
 
 ```js
 document.addEventListener('wheel', (event) => {
-  event.preventDefault() // Can stop the page from scrolling
-})
+  event.preventDefault(); // Can stop the page from scrolling
+});
 ```
 
 ## 非快速滚动区域（non-fast scrollable region）
@@ -56,7 +56,7 @@ document.addEventListener('wheel', (event) => {
 ## passive
 
 ```js
-addEventListener(type, listener, { passive: boolean })
+addEventListener(type, listener, { passive: boolean });
 ```
 
 当事件注册时，其 passive 为 true 时，表明该事件的监听器（listener）为被动（passive）监听器。也就是说：监听器只是事件的接收者，无法对该事件所产生的浏览器默认行为产生任何影响。
@@ -64,7 +64,7 @@ addEventListener(type, listener, { passive: boolean })
 例如：
 
 ```js
-document.addEventListener('wheel', listener, { passive: true })
+document.addEventListener('wheel', listener, { passive: true });
 ```
 
 - 当页面滑动时
@@ -105,10 +105,10 @@ passive 默认值为`false`。
   <body>
     <script>
       setTimeout(() => {
-        console.log('Main thread is very busy')
+        console.log('Main thread is very busy');
 
         while (true) {}
-      }, 3 * 1000)
+      }, 3 * 1000);
     </script>
   </body>
 </html>
@@ -144,7 +144,7 @@ wheel 监听器函数有 80%概率会卡顿 0.5s， 通过下面的动图可以�
 
     <script>
       function jank(amt) {
-        const start = Date.now()
+        const start = Date.now();
         while (Date.now() < start + amt) {}
       }
 
@@ -152,14 +152,14 @@ wheel 监听器函数有 80%概率会卡顿 0.5s， 通过下面的动图可以�
         'wheel',
         (e) => {
           if (Math.random() > 0.8) {
-            console.log('jank start ---------')
-            jank(500)
-            console.log('jank end ---------')
-            console.log('\n')
+            console.log('jank start ---------');
+            jank(500);
+            console.log('jank end ---------');
+            console.log('\n');
           }
         },
-        { passive: !true }
-      )
+        { passive: !true },
+      );
     </script>
   </body>
 </html>
@@ -195,7 +195,7 @@ wheel 监听器函数有 80%概率会卡顿 0.5s；但通过下面的动图可�
 
     <script>
       function jank(amt) {
-        const start = Date.now()
+        const start = Date.now();
         while (Date.now() < start + amt) {}
       }
 
@@ -203,14 +203,14 @@ wheel 监听器函数有 80%概率会卡顿 0.5s；但通过下面的动图可�
         'wheel',
         (e) => {
           if (Math.random() > 0.8) {
-            console.log('jank start ---------')
-            jank(500)
-            console.log('jank end ---------')
-            console.log('\n')
+            console.log('jank start ---------');
+            jank(500);
+            console.log('jank end ---------');
+            console.log('\n');
           }
         },
-        { passive: true }
-      )
+        { passive: true },
+      );
     </script>
   </body>
 </html>

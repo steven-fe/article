@@ -37,6 +37,7 @@ const observer = new IntersectionObserver(callback[, options])
 对视口元素边界的一组缩小或扩大的偏移量。通过偏移量改变视口的范围，从而改变交叉比例。
 
 语法与`css-margin`类似：
+
 - 偏移量的方位顺序 - `top right bottom left`，可以参考`css-margin`使用缩写。
 - 偏移量只能以`px`或`%`为单位；如果以`%`为单位，则`top`和`bottom`以`height`为参照值，`left`和`right`以`width`为参照值。
 - 偏移量为正数时，扩大视口区域；反转如果偏移量为负数，则缩小视口区域。
@@ -60,6 +61,7 @@ const observer = new IntersectionObserver(callback[, options])
 #### 参数 - callback: (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => void
 
 调用callback函数的条件：
+
 - 执行IntersectionObserver构造函数时。
 - 交叉比例达到设定值（threshold）时。
 
@@ -114,6 +116,7 @@ time = 调用callback函数的时间 - document文档创建的时间
 将某个目标元素设置为观察元素，一个IntersetionObserver可以观察多个目标元素。
 
 > 要求：
+>
 > 1. 目标元素在视口元素中是可见的（不能为display: none）。
 > 2. 目标元素是视口元素的子元素。
 

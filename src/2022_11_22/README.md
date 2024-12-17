@@ -10,16 +10,16 @@ commit message: `<type>: <subject>`
 
 ### type
 
-| type | 说明 |
-| - | - |
-| feat | 新功能（feature） |
-| fix | 修复bug |
-| docs | 文档（documentation） |
-| style | 修改格式（不影响代码的功能） |
-| refactor | 重构 |
-| perf | 优化相关，比如提升性能、体验 |
-| revert | 回滚到上一个版本 |
-| merge | 代码合并 |
+| type     | 说明                         |
+| -------- | ---------------------------- |
+| feat     | 新功能（feature）            |
+| fix      | 修复bug                      |
+| docs     | 文档（documentation）        |
+| style    | 修改格式（不影响代码的功能） |
+| refactor | 重构                         |
+| perf     | 优化相关，比如提升性能、体验 |
+| revert   | 回滚到上一个版本             |
+| merge    | 代码合并                     |
 
 ### subject
 

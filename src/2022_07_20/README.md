@@ -20,7 +20,7 @@ localStorage 和 sessionStorage 对象都是 Storage 构造函数的实例，都
 
 ```ts
 class Storage {
-  setItem(key: string, value: string): void
+  setItem(key: string, value: string): void;
 }
 ```
 
@@ -30,7 +30,7 @@ class Storage {
 
 ```ts
 class Storage {
-  getItem(key: string): string | null
+  getItem(key: string): string | null;
 }
 ```
 
@@ -40,7 +40,7 @@ class Storage {
 
 ```ts
 class Storage {
-  removeItem(key: string): void
+  removeItem(key: string): void;
 }
 ```
 
@@ -50,7 +50,7 @@ class Storage {
 
 ```ts
 class Storage {
-  clear(): void
+  clear(): void;
 }
 ```
 
@@ -60,7 +60,7 @@ class Storage {
 
 ```ts
 class Storage {
-  key(index: number): string | null
+  key(index: number): string | null;
 }
 ```
 
@@ -70,7 +70,7 @@ class Storage {
 
 ```ts
 class Storage {
-  length: number
+  length: number;
 }
 ```
 
@@ -90,7 +90,7 @@ sessionStorage 对象存储的数据，只存在于当前标签页，其他相�
 ## storage 事件
 
 ```js
-window.addEventListener ('storage', event => { })
+window.addEventListener('storage', (event) => {});
 ```
 
 当`localStorage`或`sessionStorage`中的数据更新后，`storage`事件就会触发，它具有以下属性：

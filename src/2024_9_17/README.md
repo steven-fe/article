@@ -93,10 +93,10 @@ p {
 
 ```js
 // 获取 Dom 节点 style 属性的 CSS 变量
-element.style.getPropertyValue('--my-var')
+element.style.getPropertyValue('--my-var');
 // 修改 Dom 节点 style 属性的 CSS 变量
-element.style.setProperty('--my-var', jsVar + 4)
+element.style.setProperty('--my-var', jsVar + 4);
 
 // 获取 Dom 节点上的 CSS 变量
-getComputedStyle(element).getPropertyValue('--my-var')
+getComputedStyle(element).getPropertyValue('--my-var');
 ```

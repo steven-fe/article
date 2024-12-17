@@ -27,6 +27,7 @@
 `offsetLeft`和`offsetRight`属性的返回值，表示`元素`与`该元素的offsetParent`之间的偏移距离，因此确定offsetParent很重要。
 
 元素的offsetParent确定步骤 —— 按照包含的层级关系，从近到远依次判断该元素的父元素：
+
 1. 是否为定位（position不是static）元素；如果是，则返回该元素。
 2. 是否为`<table>`、`<th>`、`<td>`元素；如果是，则返回该元素。
 3. 是否为`<body>`元素；如果是，则返回该元素。
@@ -107,36 +108,36 @@ offsetParent为null的情况：
 
 ```html
 <style>
-.scroll {
-	/* ...scroll style... */
-}
+  .scroll {
+    /* ...scroll style... */
+  }
 
-.scroll-wrap {
-	overflow: auto;
-	width: 100%;
-	height: 100%;
-}
+  .scroll-wrap {
+    overflow: auto;
+    width: 100%;
+    height: 100%;
+  }
 
-.scroll-inner {
-	overflow: hidden;
-	width: max-content;
-	width: intrinsic;           /* Safari/WebKit uses a non-standard name */
-	width: -moz-max-content;    /* Firefox/Gecko */
-	width: -webkit-max-content; /* Chrome */
-	width: max-content;
-}
+  .scroll-inner {
+    overflow: hidden;
+    width: max-content;
+    width: intrinsic; /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content; /* Firefox/Gecko */
+    width: -webkit-max-content; /* Chrome */
+    width: max-content;
+  }
 
-.scroll-content {
-	/* ...content style... */
-}
+  .scroll-content {
+    /* ...content style... */
+  }
 </style>
 
 <div class="scroll">
-	<div class="scroll-wrap">
-		<div class="scroll-inner">
-			<div class="scroll-content"></div>
-		</div>
-	</div>
+  <div class="scroll-wrap">
+    <div class="scroll-inner">
+      <div class="scroll-content"></div>
+    </div>
+  </div>
 </div>
 ```
 
@@ -165,6 +166,7 @@ offsetParent为null的情况：
 设置该属性时：设定容器元素在垂直方向滚动的像素数。
 
 ❗垂直方向设置滚动像素数的范围：[0, scrollHeight - clientHeight]；
+
 - 小于0时，`scrollTop`被设置为0。
 - 大于`scrollHeight - clientHeight`时，`scrollTop`被设置为`scrollHeight - clientHeight`。
 
@@ -179,6 +181,7 @@ offsetParent为null的情况：
 设置该属性时：设定容器元素在水平方向滚动的像素数。
 
 ❗水平方向设置滚动像素数的范围：[0, scrollWidth - clientWidth]；
+
 - 小于0时，`scrollLeft`被设置为0。
 - 大于`scrollWidth - clientWidth`时，`scrollTop`被设置为`scrollWidth - clientWidth`。
 
@@ -193,6 +196,7 @@ offsetParent为null的情况：
 为此，浏览器在每个元素上提供了`getBoundingClientRect()`方法。
 
 返回 DOMRect 对象，包含8个属性，每个属性值都可以是小数：
+
 - width，其值等于 content + padding + borderWidth 的像素数
 - height，其值等于 content + padding + borderWidth 的像素数
 - x / left，元素左外侧距离**视口左内侧**的像素数

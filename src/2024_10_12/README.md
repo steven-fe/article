@@ -73,14 +73,14 @@ browserslist 筛选语句结构：`query[combiner query][combiner query]...`
 | Android (WebView) |                 | `Android`                 |                 |                   |
 | Baidu             | `Baidu`         |                           |                 |                   |
 | BlackBerry        |                 |                           |                 | `BlackBerry` `bb` |
-| Chrome            | `Chrome`        | `ChromeAndroid` `and_chr` | ↪︎ `ios_saf`    |                   |
-| Edge              | `Edge`          | ↪︎ `and_chr`              | ↪︎ `ios_saf`    |                   |
+| Chrome            | `Chrome`        | `ChromeAndroid` `and_chr` | ↪︎ `ios_saf`   |                   |
+| Edge              | `Edge`          | ↪︎ `and_chr`             | ↪︎ `ios_saf`   |                   |
 | Electron          | `Electron`      |                           |                 |                   |
-| Firefox           | `Firefox` `ff`  | `FirefoxAndroid` `and_ff` | ↪︎ `ios_saf`    |                   |
+| Firefox           | `Firefox` `ff`  | `FirefoxAndroid` `and_ff` | ↪︎ `ios_saf`   |                   |
 | Internet Explorer | `Explorer` `ie` |                           |                 | `ie_mob`          |
 | Node.js           | `Node`          |                           |                 |                   |
 | KaiOS Browser     |                 |                           |                 | `kaios`           |
-| Opera             | `Opera`         | `op_mob`                  | ↪︎ `ios_saf`    |                   |
+| Opera             | `Opera`         | `op_mob`                  | ↪︎ `ios_saf`   |                   |
 | Opera Mini        |                 | `OperaMini` `op_mini`     |                 |                   |
 | QQ browser        |                 | `and_qq`                  |                 |                   |
 | Safari            | `Safari`        |                           | `iOS` `ios_saf` |                   |

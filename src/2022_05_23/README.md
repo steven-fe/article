@@ -9,15 +9,15 @@ Element 方法 `scrollIntoView`：滚动父级容器，使得元素出现在视�
 ## 参数
 
 ```ts
-type alignToTop = boolean
+type alignToTop = boolean;
 type scrollIntoViewOptions = {
-  behavior: 'auto' | 'smooth'
-  block: 'start' | 'center' | 'end' | 'nearest'
-  inline: 'start' | 'center' | 'end' | 'nearest'
-}
+  behavior: 'auto' | 'smooth';
+  block: 'start' | 'center' | 'end' | 'nearest';
+  inline: 'start' | 'center' | 'end' | 'nearest';
+};
 
 interface Element {
-  scrollIntoView(arg?: alignToTop | scrollIntoViewOptions): void
+  scrollIntoView(arg?: alignToTop | scrollIntoViewOptions): void;
 }
 ```
 
@@ -58,8 +58,8 @@ alignToTop
 document.querySelector('div').scrollIntoView({
   behavior: 'smooth',
   block: 'center',
-  inline: 'nearest'
-})
+  inline: 'nearest',
+});
 ```
 
 <p align="center"><img src="./demo.gif" width="50%"></p>

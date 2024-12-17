@@ -11,24 +11,28 @@ requested resource.`，原来被浏览器的同源策略拦截了。
 ## 抽象问题，并探究
 
 添加图片的方法：
+
 ```js
 const appendImage = (imageUrl, crossOrigin = 'anonymous') => {
-	const image = document.createElement('img')
+  const image = document.createElement('img');
 
-	if (crossOrigin) image.crossOrigin = crossOrigin
-	image.src = imageUrl
+  if (crossOrigin) image.crossOrigin = crossOrigin;
+  image.src = imageUrl;
 
-	document.body.append(image)
-}
+  document.body.append(image);
+};
 ```
 
 当在Chrome浏览器中添加全新的图片时，显示正常：
+
 <p align="center"><img src="./1.png" width="80%"></p>
 
 清空浏览器缓存之后，当在浏览器中加载需要cors属性的图片时，显示正常：
+
 <p align="center"><img src="./2.png" width="80%"></p>
 
 清空浏览器缓存之后，当在浏览器中添加该图片时，显示正常；添加cors属性然后加载该图片时，无法显示：
+
 <p align="center"><img src="./3.png" width="80%"></p>
 
 通过Response Headers可以看到：因为没有响应`Access-Control-Allow-Origin`字段，被浏览器的CORS策略拦截了。
@@ -53,24 +57,25 @@ const appendImage = (imageUrl, crossOrigin = 'anonymous') => {
 
 ```js
 const appendImage = (imageUrl, crossOrigin = 'anonymous') => {
-	const image = document.createElement('img')
-	let src = imageUrl
+  const image = document.createElement('img');
+  let src = imageUrl;
 
-	if (crossOrigin) {
-		src = new URL(src)
-		src.searchParams.append(`cors-type`, crossOrigin)
-		src = src.toString()
+  if (crossOrigin) {
+    src = new URL(src);
+    src.searchParams.append(`cors-type`, crossOrigin);
+    src = src.toString();
 
-		image.crossOrigin = crossOrigin
-	}
+    image.crossOrigin = crossOrigin;
+  }
 
-	image.src = src
+  image.src = src;
 
-	document.body.append(image)
-}
+  document.body.append(image);
+};
 ```
 
 修改appendImage函数之后，再次请求图片，有无cors属性的图片均展示：
+
 <p align="center"><img src="./4.png" width="80%"></p>
 
 ## 总结

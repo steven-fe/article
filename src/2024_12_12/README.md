@@ -60,24 +60,21 @@
   <body>
     <p style="text-align: center;">1. <code>word-break: normal</code></p>
     <p class="normal narrow">
-      This is a long and Honorificabilitudinitatibus
-      califragilisticexpialidocious
+      This is a long and Honorificabilitudinitatibus califragilisticexpialidocious
       Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu
       グレートブリテンおよび北アイルランド連合王国という言葉は本当に長い言葉
     </p>
 
     <p style="text-align: center;">2. <code>word-break: break-all</code></p>
     <p class="breakAll narrow">
-      This is a long and Honorificabilitudinitatibus
-      califragilisticexpialidocious
+      This is a long and Honorificabilitudinitatibus califragilisticexpialidocious
       Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu
       グレートブリテンおよび北アイルランド連合王国という言葉は本当に長い言葉
     </p>
 
     <p style="text-align: center;">3. <code>word-break: keep-all</code></p>
     <p class="keepAll narrow">
-      This is a long and Honorificabilitudinitatibus
-      califragilisticexpialidocious
+      This is a long and Honorificabilitudinitatibus califragilisticexpialidocious
       Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu
       グレートブリテンおよび北アイルランド連合王国という言葉は本当に長い言葉
     </p>
@@ -141,24 +138,21 @@
   <body>
     <p style="text-align: center;">1. <code>overflow-wrap: normal</code></p>
     <p class="normal narrow">
-      This is a long and Honorificabilitudinitatibus
-      califragilisticexpialidocious
+      This is a long and Honorificabilitudinitatibus califragilisticexpialidocious
       Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu
       グレートブリテンおよび北アイルランド連合王国という言葉は本当に長い言葉
     </p>
 
     <p style="text-align: center;">2. <code>overflow-wrap: anywhere</code></p>
     <p class="anywhere narrow">
-      This is a long and Honorificabilitudinitatibus
-      califragilisticexpialidocious
+      This is a long and Honorificabilitudinitatibus califragilisticexpialidocious
       Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu
       グレートブリテンおよび北アイルランド連合王国という言葉は本当に長い言葉
     </p>
 
     <p style="text-align: center;">3. <code>overflow-wrap: break-word</code></p>
     <p class="breakAll narrow">
-      This is a long and Honorificabilitudinitatibus
-      califragilisticexpialidocious
+      This is a long and Honorificabilitudinitatibus califragilisticexpialidocious
       Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu
       グレートブリテンおよび北アイルランド連合王国という言葉は本当に長い言葉
     </p>
@@ -211,16 +205,14 @@
   <body>
     <p style="text-align: center;">1. <code>overflow-wrap: anywhere</code></p>
     <p class="anywhere narrow">
-      This is a long and Honorificabilitudinitatibus
-      califragilisticexpialidocious
+      This is a long and Honorificabilitudinitatibus califragilisticexpialidocious
       Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu
       グレートブリテンおよび北アイルランド連合王国という言葉は本当に長い言葉
     </p>
 
     <p style="text-align: center;">2. <code>overflow-wrap: break-word</code></p>
     <p class="breakAll narrow">
-      This is a long and Honorificabilitudinitatibus
-      califragilisticexpialidocious
+      This is a long and Honorificabilitudinitatibus califragilisticexpialidocious
       Taumatawhakatangihangakoauauotamateaturipukakapikimaungahoronukupokaiwhenuakitanatahu
       グレートブリテンおよび北アイルランド連合王国という言葉は本当に長い言葉
     </p>

@@ -3,14 +3,19 @@
 一位前端同事利用postMessage开发需求，在做code review时，发现了一个微小的细节问题。其部分代码如下：
 
 ```js
-const hostUrl = new URL(targetUrl).origin
+const hostUrl = new URL(targetUrl).origin;
 
 export function setMsg(value) {
-  if (!contentWindow) { return }
-  contentWindow.postMessage({
-    method: 'set',
-    value,
-  }, hostUrl)
+  if (!contentWindow) {
+    return;
+  }
+  contentWindow.postMessage(
+    {
+      method: 'set',
+      value,
+    },
+    hostUrl,
+  );
 }
 ```
 

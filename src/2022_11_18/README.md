@@ -13,12 +13,15 @@
 ### 使用场景 - 撤销某个非merge commit的commit
 
 初始commit log：
+
 ```
             B2(B2)---B3(B3)---B4(B4)
            /                    \
 B0(B0)---B1(B1)-----------------B4`(Merge branch 'fix')---B5(B5)
 ```
+
 初始文件index.js：
+
 ```
 B0 // you, 1 hours ago ∙ B0
 B1 // you, 2 hours ago ∙ B1
@@ -31,11 +34,13 @@ B5 // you, 6 hours ago ∙ B5
 > 撤销commit id为B5的commit，删除所提交的代码“B5”
 
 找到提交代码“B5”的commit的commit id，然后执行revert命令：
+
 ```
 git revert B5
 ```
 
 执行命令之后，会自动弹出编辑revert commit message：
+
 ```
 Revert "B5"
 
@@ -58,11 +63,13 @@ This reverts commit B5.
 结果：在当前分支添加revert commit，“B5”代码被删除。
 
 此时commit log被改为：
+
 ```
             B2(B2)---B3(B3)---B4(B4)
            /                    \
 B0(B0)---B1(B1)-----------------B4`(Merge branch 'fix')---B5(B5)---B6(Revert 'B5')
 ```
+
 ```
 B0 // you, 1 hours ago ∙ B0
 B1 // you, 2 hours ago ∙ B1
@@ -74,12 +81,15 @@ B4 // you, 5 hours ago ∙ B4
 ### 使用场景 - 撤销某个merge commit
 
 初始commit log：
+
 ```
             B2(B2)---B3(B3)---B4(B4)
            /                    \
 B0(B0)---B1(B1)-----------------B4`(Merge branch 'fix')---B5(B5)
 ```
+
 初始文件index.js：
+
 ```
 B0 // you, 1 hours ago ∙ B0
 B1 // you, 2 hours ago ∙ B1
@@ -92,11 +102,13 @@ B5 // you, 6 hours ago ∙ B5
 > 撤销commit id为B4`的commit，删除所提交的代码“B2”、“B3”、“B4”
 
 找到merge commit的commit id，然后执行revert命令：
+
 ```
 git revert B4`
 ```
 
 执行命令之后，打印出错误的提示：
+
 ```
 error: commit B4` is a merge but no -m option was given.
 fatal: revert failed
@@ -105,6 +117,7 @@ fatal: revert failed
 通过查询[相关文档](https://git-scm.com/docs/git-revert#Documentation/git-revert.txt--mparent-number)了解到：无法直接revert merge commit；因为merge commit的父级commit有多个，Git无法判断要使用哪个父级commit（请观察上面的“初始commit log”，commit B4\`有两个父级commit：1. commit - B1，2. commit - B4）；使用命令`git revert <commit id> -m <parent number>`，决定反转到哪个父级commit；parent number是自然数，以1开始，具体的parent number与commit id映射关系，可以查看merge commit - log中的merge字段。
 
 通过命令`git log <commit id>`，查看merge commit的具体信息：
+
 ```
 git log B4`
 
@@ -121,19 +134,23 @@ Date:   ......
 
 通过上面的log信息，可以看出：parnet number为1的分支，其commit id为B1；parent number为2的分支，其commit id为B4。<br />
 因为需要“撤销commit id为B4\`的commit，删除commit id为B4\`的commit所提交的代码‘B2’、‘B3’、‘B4’”，所以需要让merge commit反转回到commit B1，执行命令：
+
 ```
 git revert B4` -m 1
 ```
+
 如果遇到合并冲突，则需要手动解决。提交revert commit message之后，revert commit就会自动添加在当前分支的末端。
 
 结果：在当前分支添加revert commit，删除commit id为B4`的commit所提交的代码“B2“、“B3“、“B4“。
 
 此时commit log被改为：
+
 ```
             B2(B2)---B3(B3)---B4(B4)
            /                    \
 B0(B0)---B1(B1)-----------------B4`(Merge branch 'fix')---B5(B5)---B6(Revert "Merge branch 'fix'")
 ```
+
 ```
 B0 // you, 1 hours ago ∙ B0
 B1 // you, 2 hours ago ∙ B1
@@ -143,6 +160,7 @@ B5 // you, 6 hours ago ∙ B5
 ### 使用场景 - 撤销多个commit
 
 初始commit log：
+
 ```
 B0(B0)---B1(B1)---B2(B2)---B3(B3)---B4(B4)---B5(B5)
 ```
@@ -177,12 +195,15 @@ git revert -n commitId9
 ### 使用场景 - 撤销某个commit
 
 初始commit log：
+
 ```
             B2(B2)---B3(B3)---B4(B4)
            /                    \
 B0(B0)---B1(B1)-----------------B4`(Merge branch 'fix')---B5(B5)
 ```
+
 初始文件index.js：
+
 ```
 B0 // you, 1 hours ago ∙ B0
 B1 // you, 2 hours ago ∙ B1
@@ -195,6 +216,7 @@ B5 // you, 6 hours ago ∙ B5
 > 撤销commit id为B5，删除commit id为B5的commit所提交的代码“B5”
 
 找到提交代码“B5”的commit的上一级commit的commit id，然后执行reset命令：
+
 ```
 git reset --hard B4
 ```
@@ -202,11 +224,13 @@ git reset --hard B4
 执行上面的命令之后，Git自动将HEAD恢复到commit - B4，并且移除了commit - B5
 
 此时commit log被改为：
+
 ```
             B2(B2)---B3(B3)---B4(B4)
            /                    \
 B0(B0)---B1(B1)-----------------B4`(Merge branch 'fix')
 ```
+
 ```
 B0 // you, 1 hours ago ∙ B0
 B1 // you, 2 hours ago ∙ B1

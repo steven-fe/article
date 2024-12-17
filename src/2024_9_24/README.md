@@ -126,8 +126,8 @@ iframe 使用渲染进程数目的流程图，如下：
 
     <script>
       setInterval(() => {
-        console.log(new Date())
-      }, 1000)
+        console.log(new Date());
+      }, 1000);
     </script>
   </body>
 </html>

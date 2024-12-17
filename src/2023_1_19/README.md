@@ -23,12 +23,12 @@
 7. mix-blend-mode 属性值不为 normal 的元素；
 
 8. 以下任意属性值不为 none 的元素：
-transform、
-filter、
-backdrop-filter、
-perspective、
-clip-path、
-mask / mask-image / mask-border
+   transform、
+   filter、
+   backdrop-filter、
+   perspective、
+   clip-path、
+   mask / mask-image / mask-border
 
 9. isolation 属性值为 isolate 的元素；
 
@@ -45,6 +45,7 @@ mask / mask-image / mask-border
 <p align="center"><img src="./1.gif" width="80%"></p>
 
 上图中：
+
 - 左侧中的main1和main2设置了`z-index`为0，形成了新的层叠上下文，并且main2的层级比main1大；move1设置了`z-index`为999999，但由于无法突破父级层叠上下文的限制，无法覆盖在move2的上面。
 - 右侧中的main1和main2设置了`z-index`为auto，无法形成了新的层叠上下文；move1和move2有共同的父级层叠上下文，由于move1设置了`z-index`为999999，所以可以覆盖在move2的上面。
 

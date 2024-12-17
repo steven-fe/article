@@ -33,19 +33,17 @@ class CookieUtil {
   static get(name) {
     let cookieName = `${encodeURIComponent(name)}=`,
       cookieStart = document.cookie.indexOf(cookieName),
-      cookieValue = null
+      cookieValue = null;
 
     if (cookieStart > -1) {
-      let cookieEnd = document.cookie.indexOf(';', cookieStart)
+      let cookieEnd = document.cookie.indexOf(';', cookieStart);
       if (cookieEnd == -1) {
-        cookieEnd = document.cookie.length
+        cookieEnd = document.cookie.length;
       }
-      cookieValue = decodeURIComponent(
-        document.cookie.substring(cookieStart + cookieName.length, cookieEnd)
-      )
+      cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length, cookieEnd));
     }
 
-    return cookieValue
+    return cookieValue;
   }
 }
 ```
@@ -106,21 +104,21 @@ cookie 有效的域。（域名不包含`协议`和`端口`）
 ```js
 class CookieUtil {
   static set(name, value, expiresOrMaxAge, path, domain, secure) {
-    let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`
+    let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
 
     if (expiresOrMaxAge instanceof Date) {
-      cookieText += `; expires=${expiresOrMaxAge.toGMTString()}`
+      cookieText += `; expires=${expiresOrMaxAge.toGMTString()}`;
     } else if (typeof expiresOrMaxAge === 'number') {
-      cookieText += `; max-age=${expiresOrMaxAge}`
+      cookieText += `; max-age=${expiresOrMaxAge}`;
     }
 
-    if (path) cookieText += `; path=${path}`
+    if (path) cookieText += `; path=${path}`;
 
-    if (domain) cookieText += `; domain=${domain}`
+    if (domain) cookieText += `; domain=${domain}`;
 
-    if (secure) cookieText += '; secure'
+    if (secure) cookieText += '; secure';
 
-    document.cookie = cookieText
+    document.cookie = cookieText;
   }
 }
 ```
@@ -132,7 +130,7 @@ class CookieUtil {
 ```js
 class CookieUtil {
   static unset(name, path, domain, secure) {
-    CookieUtil.set(name, '', new Date(0), path, domain, secure)
+    CookieUtil.set(name, '', new Date(0), path, domain, secure);
   }
 }
 ```

@@ -17,9 +17,10 @@
 粘性约束元素：sticky元素的父元素。
 
 sticky元素：
- - 设置了`position: sticky`的元素。
- - sticky定位，分为两个状态：相对定位、固定定位
- - 当sticky定位表现固定定位时，sticky元素相对于滚动元素定位。
+
+- 设置了`position: sticky`的元素。
+- sticky定位，分为两个状态：相对定位、固定定位
+- 当sticky定位表现固定定位时，sticky元素相对于滚动元素定位。
 
 ## sticky定位原理
 
@@ -44,7 +45,8 @@ sticky元素：
 1. `sticky元素`需要达到固定定位的位置。
 
 2. 为`sticky元素`设置位置参数，相反方向上`sticky元素`的外边界（margin or border or padding or content）到`粘性约束元素`的内边界（content）之间需要有元素，可以撑起一定的空间，供`sticky元素`固定定位使用。
-	- 例如：当sticky元素设置`top`之后；`sticky元素`的外边界（margin-bottom or border-bottom or padding-bottom or content-bottom）到`粘性约束元素`的content-bottom之间**有元素存在，且能撑起一定的空间**。
+
+   - 例如：当sticky元素设置`top`之后；`sticky元素`的外边界（margin-bottom or border-bottom or padding-bottom or content-bottom）到`粘性约束元素`的content-bottom之间**有元素存在，且能撑起一定的空间**。
 
 3. `粘性约束元素`与`滚动元素`之间不能存在样式属性为`overflow: hidden`的元素。
 

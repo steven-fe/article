@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -17,24 +17,24 @@
     <script>
       let initialized = false,
         targetWindow,
-        targetOrigin
-      const inputEle = document.querySelector('input')
-      const msgEle = document.querySelector('span')
+        targetOrigin;
+      const inputEle = document.querySelector('input');
+      const msgEle = document.querySelector('span');
 
       const init = ({ data, origin, source }) => {
-        document.querySelector('section').style.display = 'block'
-        targetWindow = source.window
-        targetOrigin = origin
-      }
+        document.querySelector('section').style.display = 'block';
+        targetWindow = source.window;
+        targetOrigin = origin;
+      };
 
       document.querySelector('button').addEventListener('click', () => {
-        targetWindow.postMessage(inputEle.value, targetOrigin)
-      })
+        targetWindow.postMessage(inputEle.value, targetOrigin);
+      });
 
       window.addEventListener('message', (event) => {
-        msgEle.innerHTML = event.data
-        if (!initialized) init(event)
-      })
+        msgEle.innerHTML = event.data;
+        if (!initialized) init(event);
+      });
     </script>
   </body>
 </html>

@@ -23,30 +23,31 @@ SOLID是由五个设计原则的首字母组成的：
 因此需要将多职责的类拆分为单职责的类，即使某一个职责相关代码需要修改，其影响范围仅限于这个类，其他职责的代码不受这个职责代码修改的影响。
 
 例如：
+
 ```ts
 // 一个光猫类，有两个职责：一个是管理连接（dial和hangup）；一个是数据传输（send和receive）
 class Model {
-  dial (pno: string) {}
-  hangup () {}
-  send (msg: string) {}
+  dial(pno: string) {}
+  hangup() {}
+  send(msg: string) {}
   receive(data: string) {}
 }
 
 // 通常这两个职责并没有共同点，在一个类中实现，过于耦合。应该将其分开到两个相对独立的类中，分别维护。
 class Connection {
-  dial (pno: string) {}
-  hangup () {}
+  dial(pno: string) {}
+  hangup() {}
 }
 
 class DataChannel {
-  send (msg: string) {}
+  send(msg: string) {}
   receive(data: string) {}
 }
 
 class Model {
-  constructor () {
-    const connection = new Connection()
-    const dataChannel = new DataChannel()
+  constructor() {
+    const connection = new Connection();
+    const dataChannel = new DataChannel();
   }
 }
 ```
@@ -58,6 +59,7 @@ class Model {
 > 好处：提高代码的稳定性和灵活性。
 
 例如：
+
 ```ts
 // 有两种电脑：苹果电脑和华硕电脑。这两种电脑都继承Computer类。
 class Computer {
@@ -80,64 +82,64 @@ class AsusDiscountComputer extends AsusComputer {
 子类可以`完全`替换父类；父类能出现的地方，子类也可以出现。
 
 例如：
+
 ```js
 // 创建一个Bird类，假设所有的鸟都会飞
-class Bird{
+class Bird {
   fly() {}
 }
 
-const allFly = (birds) => birds.forEach(bird => bird.fly())
+const allFly = (birds) => birds.forEach((bird) => bird.fly());
 
-allFly([new Bird(), new Bird(), new Bird()])
+allFly([new Bird(), new Bird(), new Bird()]);
 
 // 扩展三个子类：鸭子、鹦鹉、天鹅
 class Duck extends Bird {
-  quack(){}
+  quack() {}
 }
 
 class Parrot extends Bird {
-  repeat(){}
+  repeat() {}
 }
 
-class Swan extends Bird{
-  beBeautiful(){}
+class Swan extends Bird {
+  beBeautiful() {}
 }
 
-allFly([new Duck(), new Parrot(), new Swan()])
+allFly([new Duck(), new Parrot(), new Swan()]);
 
 // 再添加一只企鹅，但是企鹅并不会飞，如果想调用fly方法，我们就抛出一个错误
 class Penguin extends Bird {
-  fly(){
-    throw new Error('Sorry, but I cannot fly')
+  fly() {
+    throw new Error('Sorry, but I cannot fly');
   }
-  swim(){}
+  swim() {}
 }
 
-allFly([new Duck(), new Parrot(), new Swan(), new Penguin()]) // Error: Sorry, but I cannot fly.
+allFly([new Duck(), new Parrot(), new Swan(), new Penguin()]); // Error: Sorry, but I cannot fly.
 
 // fly方法并不期望出现内部错误，allFly方法也只是为会飞的鸟创建的。企鹅不会飞，所以我们违背了里氏替换原则
 // 会飞的鸟与不会飞的鸟不能继承同一个Bird类。需要创建一个FlyingBird类供会飞的鸟继承
-class Bird{
-}
+class Bird {}
 
-class FlyingBird{
-  fly(){}
+class FlyingBird {
+  fly() {}
 }
 
 class Duck extends FlyingBird {
-  quack(){}
+  quack() {}
 }
 
 class Parrot extends FlyingBird {
-  repeat(){}
+  repeat() {}
 }
 
-class Swan extends FlyingBird{
-  beBeautiful(){}
+class Swan extends FlyingBird {
+  beBeautiful() {}
 }
 
 class Penguin extends Bird {
-  swim(){}
+  swim() {}
 }
 ```
 
@@ -146,6 +148,7 @@ class Penguin extends Bird {
 客户端不应该依赖他们不使用的接口(接口应该是精简的，拥有尽可能少的行为)。
 
 例如：
+
 ```ts
 // 有一个名为 Troll 的类，它实现了一个名为 Character 的接口，但是 Troll 既不会游泳也不会说话，所以它似乎不太适合实现我们的接口。
 interface Character {
@@ -200,6 +203,7 @@ class Troll implements Shooter, Dancer {
   }
 }
 ```
+
 ## D：依赖倒置原则（Dependency Inversion Principle）
 
 基本定义是：
@@ -216,55 +220,55 @@ class Troll implements Shooter, Dancer {
 
 // 抽象
 interface ICar {
-  brand: string
-  drive(): void
+  brand: string;
+  drive(): void;
 }
 
 interface IDriver {
-  setCar(car: ICar): void
-  drive(car: ICar): void
+  setCar(car: ICar): void;
+  drive(car: ICar): void;
 }
 
 // 细节
 class Driver implements IDriver {
-  private car: ICar
+  private car: ICar;
 
-  constructor (car: ICar) {
-    this.car = car
+  constructor(car: ICar) {
+    this.car = car;
   }
 
-  setCar (car: ICar) {
-    this.car = car
+  setCar(car: ICar) {
+    this.car = car;
   }
 
-  drive () {
-    this.car.drive()
+  drive() {
+    this.car.drive();
   }
 }
 
 class BMW implements ICar {
   brand: string;
 
-  constructor (brand: string) {
-    this.brand = brand
+  constructor(brand: string) {
+    this.brand = brand;
   }
-  drive () {}
+  drive() {}
 }
 
 class Benz implements ICar {
   brand: string;
 
-  constructor (brand: string) {
-    this.brand = brand
+  constructor(brand: string) {
+    this.brand = brand;
   }
-  drive () {}
+  drive() {}
 }
 
-const li740 = new BMW('BMW')
-const s600 = new Benz('Benz')
+const li740 = new BMW('BMW');
+const s600 = new Benz('Benz');
 
-const driver = new Driver(li740)
-driver.setCar(s600) // replace li740 with s600
+const driver = new Driver(li740);
+driver.setCar(s600); // replace li740 with s600
 ```
 
 ## 总结

@@ -9,7 +9,7 @@ postMessage 是 html5 引入的 API，postMessage 方法允许来自`不同源`�
 需要在接收数据窗口的全局对象下调用该方法。
 
 ```js
-targetWindow.postMessage(message, targetOrigin, [transfer])
+targetWindow.postMessage(message, targetOrigin, [transfer]);
 ```
 
 - targetWindow：目标窗口的`全局对象`引用，比如 iframe 的 contentWindow 属性、执行 window.open 返回的窗口对象、或者是命名过或数值索引的 window.frames。
@@ -29,9 +29,9 @@ targetWindow.postMessage(message, targetOrigin, [transfer])
 
 ```js
 window.addEventListener('message', (event) => {
-  const { data, origin, source } = event
+  const { data, origin, source } = event;
   /* some code */
-})
+});
 ```
 
 - data：从其他 window 中传递过来的数据，`该数据为message数据的克隆版本，而非message数据本身`。

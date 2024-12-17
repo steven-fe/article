@@ -7,11 +7,13 @@
 <p align="center"><img src="./1.png"></p>
 
 类图由三个区域组成：
+
 - 名称：类/接口的名称；当类是接口时，需要在名称的上一行添加`<<interface>>`。
 - 属性：结构为 `[visibility attr] fieldName: dataType`。
 - 方法：结构为 `[visibility attr] methodName(arg1Name: dataType, ...): returnDataType`。
 
 在属性和方法的开头是`访问修饰符（visibility attr）`：
+
 - “+”表示`public`；
 - “-”表示`private`；
 - “#”表示`protected`；
@@ -40,13 +42,13 @@ class Person implements IPerson {
   name: string;
   age: number;
 
-  constructor (name: string, age: number) {
-    this.name = name
-    this.age = age
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
   }
 
-  sayHi (msg: string): void {
-    console.log(`${this.name} say: "${msg}"`)
+  sayHi(msg: string): void {
+    console.log(`${this.name} say: "${msg}"`);
   }
 }
 ```
@@ -64,26 +66,26 @@ class Person {
   name: string;
   age: number;
 
-  constructor (name: string, age: number) {
-    this.name = name
-    this.age = age
+  constructor(name: string, age: number) {
+    this.name = name;
+    this.age = age;
   }
 
-  sayHi (msg: string): void {
-    console.log(`${this.name} say: "${msg}"`)
+  sayHi(msg: string): void {
+    console.log(`${this.name} say: "${msg}"`);
   }
 }
 
 class Student extends Person {
   score: number;
 
-  constructor (name: string, age: number, score: number) {
-    super(name, age)
-    this.score = score
+  constructor(name: string, age: number, score: number) {
+    super(name, age);
+    this.score = score;
   }
 
-  printScore () {
-    console.log(this.score)
+  printScore() {
+    console.log(this.score);
   }
 }
 ```
@@ -105,9 +107,9 @@ class Employee {
   name: string;
   timeCard: TimeCard;
 
-  constructor (name: string, timeCard: TimeCard) {
-    this.name = name
-    this.timeCard = timeCard
+  constructor(name: string, timeCard: TimeCard) {
+    this.name = name;
+    this.timeCard = timeCard;
   }
 }
 ```
@@ -126,10 +128,10 @@ class Employee {
 class Engine {}
 
 class Car {
-  engine: Engine
+  engine: Engine;
 
-  constructor (engine: Engine) {
-    this.engine = engine
+  constructor(engine: Engine) {
+    this.engine = engine;
   }
 }
 ```
@@ -150,8 +152,8 @@ class Mouth {}
 class Face {
   mouth: Mouth;
 
-  constructor (mouth: Mouth) {
-    this.mouth = mouth
+  constructor(mouth: Mouth) {
+    this.mouth = mouth;
   }
 }
 ```
@@ -170,7 +172,7 @@ class Face {
 class Car {}
 
 class Driver {
-  drive (car: Car) {}
+  drive(car: Car) {}
 }
 ```
 

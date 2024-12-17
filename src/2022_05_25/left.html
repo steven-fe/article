@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,18 +13,18 @@
       <button>确认</button>
     </div>
     <script>
-      const targetOrigin = '/'
-      const targetWindow = window.parent.frames[1]
-      const inputEle = document.querySelector('input')
-      const msgEle = document.querySelector('span')
+      const targetOrigin = '/';
+      const targetWindow = window.parent.frames[1];
+      const inputEle = document.querySelector('input');
+      const msgEle = document.querySelector('span');
 
       document.querySelector('button').addEventListener('click', () => {
-        targetWindow.postMessage(inputEle.value, targetOrigin)
-      })
+        targetWindow.postMessage(inputEle.value, targetOrigin);
+      });
 
       window.addEventListener('message', (event) => {
-        msgEle.innerHTML = event.data
-      })
+        msgEle.innerHTML = event.data;
+      });
     </script>
   </body>
 </html>

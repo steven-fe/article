@@ -57,8 +57,8 @@ Service Worker 是 Chrome 团队提出和力推的一个 WEB API，该 WEB API �
 ```js
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./serviceWorker.js')
-  })
+    navigator.serviceWorker.register('./serviceWorker.js');
+  });
 }
 ```
 
@@ -74,9 +74,9 @@ if ('serviceWorker' in navigator) {
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./serviceWorker.js', {
-      scope: './article/'
-    })
-  })
+      scope: './article/',
+    });
+  });
 }
 ```
 
@@ -107,8 +107,8 @@ ServiceWorkerRegistration 对象有如下属性：
 ServiceWorker 对象可以通过以下方式获取：
 
 ```js
-ServiceWorker = ServiceWorkerContainer.controller
-ServiceWorker = ServiceWorkerRegistration.active
+ServiceWorker = ServiceWorkerContainer.controller;
+ServiceWorker = ServiceWorkerRegistration.active;
 ```
 
 具有如下属性和方法：
@@ -122,7 +122,7 @@ ServiceWorker = ServiceWorkerRegistration.active
 当 ServiceWorker.state 变化时，会触发该回调函数。
 
 ```js
-serviceWorker.onstatechange = () => {}
+serviceWorker.onstatechange = () => {};
 ```
 
 ### ServiceWorkerGlobalScope
@@ -228,8 +228,8 @@ self.addEventListener("activate", (event) => {
 
 ```js
 self.addEventListener('activate', (event) => {
-  event.waitUntil(clients.claim())
-})
+  event.waitUntil(clients.claim());
+});
 ```
 
 #### activated
@@ -241,7 +241,7 @@ activated（已激活） 状态表示：服务工作者线程正在控制一个�
 ```js
 self.addEventListener('fetch', (event) => {
   // Do stuff with fetch events
-})
+});
 ```
 
 #### redundant
@@ -264,8 +264,8 @@ redundant（已失效） 状态表示服务工作者线程已被宣布死亡。�
 
 ```js
 self.addEventListener('activate', (event) => {
-  event.waitUntil(self.clients.claim())
-})
+  event.waitUntil(self.clients.claim());
+});
 ```
 
 #### 实际场景 - 更新 Service Worker
@@ -285,14 +285,14 @@ self.addEventListener('activate', (event) => {
 
 ```js
 self.addEventListener('install', (event) => {
-  event.waitUntil(self.skitWaiting())
-})
+  event.waitUntil(self.skitWaiting());
+});
 ```
 
 手动更新 Service Worker：
 
 ```js
-ServiceWorkerRegistration.update()
+ServiceWorkerRegistration.update();
 ```
 
 > 更新 Service Worker 脚本文件时，默认不受 HTTP 缓存策略的影响；也就是说，每次都能请求服务器中最新的资源。
@@ -335,7 +335,7 @@ Cache Storage 是浏览器提供的一种 Web API，用于在客户端缓存中�
 ```js
 caches.open(cacheName).then((cache) => {
   // Do something with your cache
-})
+});
 ```
 
 - 添加新的缓存资源
@@ -343,7 +343,7 @@ caches.open(cacheName).then((cache) => {
 ```js
 cache.put(request, response).then(() => {
   // request/response pair has been added to the cache
-})
+});
 ```
 
 - 删除缓存资源
@@ -351,7 +351,7 @@ cache.put(request, response).then(() => {
 ```js
 cache.delete(request).then(() => {
   //your cache entry has been deleted
-})
+});
 ```
 
 - 查询是否对应的缓存资源
@@ -359,16 +359,16 @@ cache.delete(request).then(() => {
 ```js
 caches.match(request, options).then((response) => {
   // Do something with the response
-})
+});
 ```
 
 - 查询 CacheStorage 可用存储空间
 
 ```js
 navigator.storage.estimate().then((estimate) => {
-  estimate.usage // 已用空间
-  estimate.quota // 总量空间
-})
+  estimate.usage; // 已用空间
+  estimate.quota; // 总量空间
+});
 ```
 
 ### 最佳实践
@@ -377,63 +377,63 @@ MDN：
 
 ```js
 const addResourcesToCache = async (resources) => {
-  const cache = await caches.open('v1')
-  await cache.addAll(resources)
-}
+  const cache = await caches.open('v1');
+  await cache.addAll(resources);
+};
 
 const putInCache = async (request, response) => {
-  const cache = await caches.open('v1')
-  await cache.put(request, response)
-}
+  const cache = await caches.open('v1');
+  await cache.put(request, response);
+};
 
 const cacheFirst = async ({ request, preloadResponsePromise, fallbackUrl }) => {
   // First try to get the resource from the cache
-  const responseFromCache = await caches.match(request)
+  const responseFromCache = await caches.match(request);
   if (responseFromCache) {
-    return responseFromCache
+    return responseFromCache;
   }
 
   // Next try to use (and cache) the preloaded response, if it's there
-  const preloadResponse = await preloadResponsePromise
+  const preloadResponse = await preloadResponsePromise;
   if (preloadResponse) {
-    console.info('using preload response', preloadResponse)
-    putInCache(request, preloadResponse.clone())
-    return preloadResponse
+    console.info('using preload response', preloadResponse);
+    putInCache(request, preloadResponse.clone());
+    return preloadResponse;
   }
 
   // Next try to get the resource from the network
   try {
-    const responseFromNetwork = await fetch(request)
+    const responseFromNetwork = await fetch(request);
     // response may be used only once
     // we need to save clone to put one copy in cache
     // and serve second one
-    putInCache(request, responseFromNetwork.clone())
-    return responseFromNetwork
+    putInCache(request, responseFromNetwork.clone());
+    return responseFromNetwork;
   } catch (error) {
-    const fallbackResponse = await caches.match(fallbackUrl)
+    const fallbackResponse = await caches.match(fallbackUrl);
     if (fallbackResponse) {
-      return fallbackResponse
+      return fallbackResponse;
     }
     // when even the fallback response is not available,
     // there is nothing we can do, but we must always
     // return a Response object
     return new Response('Network error happened', {
       status: 408,
-      headers: { 'Content-Type': 'text/plain' }
-    })
+      headers: { 'Content-Type': 'text/plain' },
+    });
   }
-}
+};
 
 // Enable navigation preload
 const enableNavigationPreload = async () => {
   if (self.registration.navigationPreload) {
-    await self.registration.navigationPreload.enable()
+    await self.registration.navigationPreload.enable();
   }
-}
+};
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(enableNavigationPreload())
-})
+  event.waitUntil(enableNavigationPreload());
+});
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -446,20 +446,20 @@ self.addEventListener('install', (event) => {
       '/star-wars-logo.jpg',
       '/gallery/bountyHunters.jpg',
       '/gallery/myLittleVader.jpg',
-      '/gallery/snowTroopers.jpg'
-    ])
-  )
-})
+      '/gallery/snowTroopers.jpg',
+    ]),
+  );
+});
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     cacheFirst({
       request: event.request,
       preloadResponsePromise: event.preloadResponse,
-      fallbackUrl: '/gallery/myLittleVader.jpg'
-    })
-  )
-})
+      fallbackUrl: '/gallery/myLittleVader.jpg',
+    }),
+  );
+});
 ```
 
 网易新闻：
@@ -467,197 +467,111 @@ self.addEventListener('fetch', (event) => {
 ```js
 //需要缓存的资源列表
 var precacheConfig = [
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/bg_img_sm_minfy.png',
-    'c4f55f5a9784ed2093009dadf1e954f9'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/change.png',
-    '9af1b102ef784b8ff08567ba25f31d95'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/icon-download.png',
-    '1c02c724381d77a1a19ca18925e9b30c'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/icon-login-dark.png',
-    'b59ba5abe97ff29855dfa4bd3a7a9f35'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/icon-refresh.png',
-    'a5b1084e41939885969a13f8dbc88abd'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/icon-video-play.png',
-    '065ff496d7d36345196d254aff027240'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/icon.ico',
-    'a14e5365cc2b27ec57e1ab7866c6a228'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/iconfont_1.eot',
-    'e4d2788fef09eb0630d66cc7e6b1ab79'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/iconfont_1.svg',
-    'd9e57c341608fddd7c140570167bdabb'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/iconfont_1.ttf',
-    'f422407038a3180bb3ce941a4a52bfa2'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/iconfont_1.woff',
-    'ead2bef59378b00425779c4ca558d9bd'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/index.5cdf03e8.js',
-    '6262ac947d12a7b0baf32be79e273083'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/index.bc729f8a.css',
-    '58e54a2c735f72a24715af7dab757739'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/logo-app-bohe.png',
-    'ac5116d8f5fcb3e7c49e962c54ff9766'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/logo-app-mail.png',
-    'a12bbfaeee7fbf025d5ee85634fca1eb'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/logo-app-manhua.png',
-    'b8905b119cf19a43caa2d8a0120bdd06'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/logo-app-open.png',
-    'b7cc76ba7874b2132f407049d3e4e6e6'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/logo-app-read.png',
-    'e6e9c8bc72f857960822df13141cbbfd'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/logo-site.png',
-    '2b0d728b46518870a7e2fe424e9c0085'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/version_no_pic.png',
-    'aef80885188e9d763282735e53b25c0e'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/version_pc.png',
-    '42f3cc914eab7be4258fac3a4889d41d'
-  ],
-  [
-    'https://static.ws.126.net/163/wap/f2e/milk_index/version_standard.png',
-    '573408fa002e58c347041e9f41a5cd0d'
-  ]
-]
-var cacheName =
-  'sw-precache-v3-new-wap-index-' +
-  (self.registration ? self.registration.scope : '')
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/bg_img_sm_minfy.png', 'c4f55f5a9784ed2093009dadf1e954f9'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/change.png', '9af1b102ef784b8ff08567ba25f31d95'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/icon-download.png', '1c02c724381d77a1a19ca18925e9b30c'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/icon-login-dark.png', 'b59ba5abe97ff29855dfa4bd3a7a9f35'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/icon-refresh.png', 'a5b1084e41939885969a13f8dbc88abd'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/icon-video-play.png', '065ff496d7d36345196d254aff027240'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/icon.ico', 'a14e5365cc2b27ec57e1ab7866c6a228'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/iconfont_1.eot', 'e4d2788fef09eb0630d66cc7e6b1ab79'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/iconfont_1.svg', 'd9e57c341608fddd7c140570167bdabb'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/iconfont_1.ttf', 'f422407038a3180bb3ce941a4a52bfa2'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/iconfont_1.woff', 'ead2bef59378b00425779c4ca558d9bd'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/index.5cdf03e8.js', '6262ac947d12a7b0baf32be79e273083'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/index.bc729f8a.css', '58e54a2c735f72a24715af7dab757739'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/logo-app-bohe.png', 'ac5116d8f5fcb3e7c49e962c54ff9766'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/logo-app-mail.png', 'a12bbfaeee7fbf025d5ee85634fca1eb'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/logo-app-manhua.png', 'b8905b119cf19a43caa2d8a0120bdd06'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/logo-app-open.png', 'b7cc76ba7874b2132f407049d3e4e6e6'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/logo-app-read.png', 'e6e9c8bc72f857960822df13141cbbfd'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/logo-site.png', '2b0d728b46518870a7e2fe424e9c0085'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/version_no_pic.png', 'aef80885188e9d763282735e53b25c0e'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/version_pc.png', '42f3cc914eab7be4258fac3a4889d41d'],
+  ['https://static.ws.126.net/163/wap/f2e/milk_index/version_standard.png', '573408fa002e58c347041e9f41a5cd0d'],
+];
+var cacheName = 'sw-precache-v3-new-wap-index-' + (self.registration ? self.registration.scope : '');
 
-var ignoreUrlParametersMatching = [/^utm_/]
+var ignoreUrlParametersMatching = [/^utm_/];
 
 var addDirectoryIndex = function (originalUrl, index) {
-  var url = new URL(originalUrl)
+  var url = new URL(originalUrl);
   if (url.pathname.slice(-1) === '/') {
-    url.pathname += index
+    url.pathname += index;
   }
-  return url.toString()
-}
+  return url.toString();
+};
 var cleanResponse = function (originalResponse) {
   // If this is not a redirected response, then we don't have to do anything.
   if (!originalResponse.redirected) {
-    return Promise.resolve(originalResponse)
+    return Promise.resolve(originalResponse);
   }
   // Firefox 50 and below doesn't support the Response.body stream, so we may
   // need to read the entire body to memory as a Blob.
-  var bodyPromise =
-    'body' in originalResponse
-      ? Promise.resolve(originalResponse.body)
-      : originalResponse.blob()
+  var bodyPromise = 'body' in originalResponse ? Promise.resolve(originalResponse.body) : originalResponse.blob();
   return bodyPromise.then(function (body) {
     // new Response() is happy when passed either a stream or a Blob.
     return new Response(body, {
       headers: originalResponse.headers,
       status: originalResponse.status,
-      statusText: originalResponse.statusText
-    })
-  })
-}
-var createCacheKey = function (
-  originalUrl,
-  paramName,
-  paramValue,
-  dontCacheBustUrlsMatching
-) {
+      statusText: originalResponse.statusText,
+    });
+  });
+};
+var createCacheKey = function (originalUrl, paramName, paramValue, dontCacheBustUrlsMatching) {
   // Create a new URL object to avoid modifying originalUrl.
-  var url = new URL(originalUrl)
+  var url = new URL(originalUrl);
   // If dontCacheBustUrlsMatching is not set, or if we don't have a match,
   // then add in the extra cache-busting URL parameter.
-  if (
-    !dontCacheBustUrlsMatching ||
-    !url.pathname.match(dontCacheBustUrlsMatching)
-  ) {
-    url.search +=
-      (url.search ? '&' : '') +
-      encodeURIComponent(paramName) +
-      '=' +
-      encodeURIComponent(paramValue)
+  if (!dontCacheBustUrlsMatching || !url.pathname.match(dontCacheBustUrlsMatching)) {
+    url.search += (url.search ? '&' : '') + encodeURIComponent(paramName) + '=' + encodeURIComponent(paramValue);
   }
-  return url.toString()
-}
+  return url.toString();
+};
 var isPathWhitelisted = function (whitelist, absoluteUrlString) {
   // If the whitelist is empty, then consider all URLs to be whitelisted.
   if (whitelist.length === 0) {
-    return true
+    return true;
   }
   // Otherwise compare each path regex to the path of the URL passed in.
-  var path = new URL(absoluteUrlString).pathname
+  var path = new URL(absoluteUrlString).pathname;
   return whitelist.some(function (whitelistedPathRegex) {
-    return path.match(whitelistedPathRegex)
-  })
-}
-var stripIgnoredUrlParameters = function (
-  originalUrl,
-  ignoreUrlParametersMatching
-) {
-  var url = new URL(originalUrl)
+    return path.match(whitelistedPathRegex);
+  });
+};
+var stripIgnoredUrlParameters = function (originalUrl, ignoreUrlParametersMatching) {
+  var url = new URL(originalUrl);
   // Remove the hash; see https://github.com/GoogleChrome/sw-precache/issues/290
-  url.hash = ''
+  url.hash = '';
   url.search = url.search
     .slice(1) // Exclude initial '?'
     .split('&') // Split into an array of 'key=value' strings
     .map(function (kv) {
-      return kv.split('=') // Split each 'key=value' string into a [key, value] array
+      return kv.split('='); // Split each 'key=value' string into a [key, value] array
     })
     .filter(function (kv) {
       return ignoreUrlParametersMatching.every(function (ignoredRegex) {
-        return !ignoredRegex.test(kv[0]) // Return true iff the key doesn't match any of the regexes.
-      })
+        return !ignoredRegex.test(kv[0]); // Return true iff the key doesn't match any of the regexes.
+      });
     })
     .map(function (kv) {
-      return kv.join('=') // Join each [key, value] array into a 'key=value' string
+      return kv.join('='); // Join each [key, value] array into a 'key=value' string
     })
-    .join('&') // Join the array of 'key=value' strings into a string with '&' in between each
-  return url.toString()
-}
+    .join('&'); // Join the array of 'key=value' strings into a string with '&' in between each
+  return url.toString();
+};
 
-var hashParamName = '_sw-precache'
+var hashParamName = '_sw-precache';
 //定义需要缓存的url列表
 var urlsToCacheKeys = new Map(
   precacheConfig.map(function (item) {
-    var relativeUrl = item[0]
-    var hash = item[1]
-    var absoluteUrl = new URL(relativeUrl, self.location)
-    var cacheKey = createCacheKey(absoluteUrl, hashParamName, hash, false)
-    return [absoluteUrl.toString(), cacheKey]
-  })
-)
+    var relativeUrl = item[0];
+    var hash = item[1];
+    var absoluteUrl = new URL(relativeUrl, self.location);
+    var cacheKey = createCacheKey(absoluteUrl, hashParamName, hash, false);
+    return [absoluteUrl.toString(), cacheKey];
+  }),
+);
 //把cache中的url提取出来,进行去重操作
 function setOfCachedUrls(cache) {
   return cache
@@ -665,13 +579,13 @@ function setOfCachedUrls(cache) {
     .then(function (requests) {
       //提取url
       return requests.map(function (request) {
-        return request.url
-      })
+        return request.url;
+      });
     })
     .then(function (urls) {
       //去重
-      return new Set(urls)
-    })
+      return new Set(urls);
+    });
 }
 //sw安装阶段
 self.addEventListener('install', function (event) {
@@ -688,40 +602,34 @@ self.addEventListener('install', function (event) {
                 //设置same-origin是为了兼容旧版本safari中其默认值不为same-origin,
                 //只有当URL与响应脚本同源才发送 cookies、 HTTP Basic authentication 等验证信息
                 var request = new Request(cacheKey, {
-                  credentials: 'same-origin'
-                })
+                  credentials: 'same-origin',
+                });
                 return fetch(request).then(function (response) {
                   //通过fetch api请求资源
                   if (!response.ok) {
                     throw new Error(
-                      'Request for ' +
-                        cacheKey +
-                        ' returned a ' +
-                        'response with status ' +
-                        response.status
-                    )
+                      'Request for ' + cacheKey + ' returned a ' + 'response with status ' + response.status,
+                    );
                   }
-                  return cleanResponse(response).then(function (
-                    responseToCache
-                  ) {
+                  return cleanResponse(response).then(function (responseToCache) {
                     //并设置到当前cache中
-                    return cache.put(cacheKey, responseToCache)
-                  })
-                })
+                    return cache.put(cacheKey, responseToCache);
+                  });
+                });
               }
-            })
-          )
-        })
+            }),
+          );
+        });
       })
       .then(function () {
         //强制跳过等待阶段,进入激活阶段
-        return self.skipWaiting()
-      })
-  )
-})
+        return self.skipWaiting();
+      }),
+  );
+});
 self.addEventListener('activate', function (event) {
   //清除cache中原来老的一批相同key的数据
-  var setOfExpectedUrls = new Set(urlsToCacheKeys.values())
+  var setOfExpectedUrls = new Set(urlsToCacheKeys.values());
   event.waitUntil(
     caches
       .open(cacheName)
@@ -731,48 +639,45 @@ self.addEventListener('activate', function (event) {
             existingRequests.map(function (existingRequest) {
               if (!setOfExpectedUrls.has(existingRequest.url)) {
                 //cache中删除指定对象
-                return cache.delete(existingRequest)
+                return cache.delete(existingRequest);
               }
-            })
-          )
-        })
+            }),
+          );
+        });
       })
       .then(function () {
         //self相当于webworker线程的当前作用域
         //当一个 service worker 被初始注册时，页面在下次加载之前不会使用它。claim() 方法会立即控制这些页面
         //从而更新客户端上的serviceworker
-        return self.clients.claim()
-      })
-  )
-})
+        return self.clients.claim();
+      }),
+  );
+});
 
 self.addEventListener('fetch', function (event) {
   if (event.request.method === 'GET') {
     // 标识位,用来判断是否需要缓存
-    var shouldRespond
+    var shouldRespond;
     // 对url进行一些处理,移除一些不必要的参数
-    var url = stripIgnoredUrlParameters(
-      event.request.url,
-      ignoreUrlParametersMatching
-    )
+    var url = stripIgnoredUrlParameters(event.request.url, ignoreUrlParametersMatching);
     // 如果该url不是我们想要缓存的url,置为false
-    shouldRespond = urlsToCacheKeys.has(url)
+    shouldRespond = urlsToCacheKeys.has(url);
     // 如果shouldRespond未false,再次验证
-    var directoryIndex = 'index.html'
+    var directoryIndex = 'index.html';
     if (!shouldRespond && directoryIndex) {
-      url = addDirectoryIndex(url, directoryIndex)
-      shouldRespond = urlsToCacheKeys.has(url)
+      url = addDirectoryIndex(url, directoryIndex);
+      shouldRespond = urlsToCacheKeys.has(url);
     }
     // 再次验证,判断其是否是一个navigation类型的请求
-    var navigateFallback = ''
+    var navigateFallback = '';
     if (
       !shouldRespond &&
       navigateFallback &&
       event.request.mode === 'navigate' &&
       isPathWhitelisted([], event.request.url)
     ) {
-      url = new URL(navigateFallback, self.location).toString()
-      shouldRespond = urlsToCacheKeys.has(url)
+      url = new URL(navigateFallback, self.location).toString();
+      shouldRespond = urlsToCacheKeys.has(url);
     }
     // 如果标识位为true
     if (shouldRespond) {
@@ -781,29 +686,23 @@ self.addEventListener('fetch', function (event) {
           .open(cacheName)
           .then(function (cache) {
             //去缓存cache中找对应的url的值
-            return cache
-              .match(urlsToCacheKeys.get(url))
-              .then(function (response) {
-                //如果找到了,就返回value
-                if (response) {
-                  return response
-                }
-                throw Error('The cached response that was expected is missing.')
-              })
+            return cache.match(urlsToCacheKeys.get(url)).then(function (response) {
+              //如果找到了,就返回value
+              if (response) {
+                return response;
+              }
+              throw Error('The cached response that was expected is missing.');
+            });
           })
           .catch(function (e) {
             // 如果没找到则请求该资源
-            console.warn(
-              'Couldn\'t serve response for "%s" from cache: %O',
-              event.request.url,
-              e
-            )
-            return fetch(event.request)
-          })
-      )
+            console.warn('Couldn\'t serve response for "%s" from cache: %O', event.request.url, e);
+            return fetch(event.request);
+          }),
+      );
     }
   }
-})
+});
 ```
 
 ## 总结
